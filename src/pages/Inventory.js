@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useCallback } from "react";
 
 function Inventory() {
-  const navigate = useNavigate();
   const token = localStorage.getItem("token");
 
   const [products, setProducts] = useState([]);
@@ -19,7 +18,7 @@ function Inventory() {
     gst_percentage: ""
   });
 
-  const fetchProducts = async () => {
+  const fetchProducts = useCallback(async () => {
     try {
       const res = await axios.get("http://localhost:5000/products", {
         headers: { Authorization: `Bearer ${token}` }
@@ -28,11 +27,11 @@ function Inventory() {
     } catch (err) {
       console.log(err);
     }
-  };
+  },[token]);
 
   useEffect(() => {
     fetchProducts();
-  }, []);
+  }, [fetchProducts]);
 
   const handleChange = (e) => {
     setFormData({
