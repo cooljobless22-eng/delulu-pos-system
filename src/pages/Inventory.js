@@ -20,7 +20,7 @@ function Inventory() {
 
   const fetchProducts = useCallback(async () => {
     try {
-      const res = await axios.get("http://localhost:5000/products", {
+      const res = await axios.get("https://delulu-pos-system-1.onrender.com/products", {
         headers: { Authorization: `Bearer ${token}` }
       });
       setProducts(res.data);
@@ -44,7 +44,7 @@ function Inventory() {
     e.preventDefault();
     try {
       await axios.post(
-        "http://localhost:5000/add-product",
+        "https://delulu-pos-system-1.onrender.com/add-product",
         formData,
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -67,7 +67,7 @@ function Inventory() {
   const handleDelete = async (id) => {
     if (!window.confirm("Delete this product?")) return;
 
-    await axios.delete(`http://localhost:5000/products/${id}`, {
+    await axios.delete(`https://delulu-pos-system-1.onrender.com/products/${id}`, {
       headers: { Authorization: `Bearer ${token}` }
     });
 
@@ -89,7 +89,7 @@ function Inventory() {
     e.preventDefault();
 
     await axios.put(
-      `http://localhost:5000/products/${editingId}`,
+      `https://delulu-pos-system-1.onrender.com/products/${editingId}`,
       formData,
       { headers: { Authorization: `Bearer ${token}` } }
     );
